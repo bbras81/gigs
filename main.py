@@ -1,6 +1,7 @@
 import flet as ft
 from views.layout.menus import menu_appbar
 from views.layout.home import home
+from views.clients_form.clients_view import clients_view
 
 
 def main(page: ft.Page):
@@ -22,6 +23,14 @@ def main(page: ft.Page):
                 controls=[home(page)],
             )
         )
+        if e.route == "/view_client":
+            page.views.append(
+                ft.View(
+                    route="/view_client",
+                    appbar=app_bar,
+                    controls=[clients_view(page)],  # Chama a visualização dos clientes
+                )
+            )
         page.update()
 
     def view_pop(view):
