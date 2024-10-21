@@ -16,7 +16,9 @@ def clients_view(page: ft.Page):
                 ft.ListTile(
                     title=ft.Text(f"{list[i][1]} (ID: {list[i][0]})"),
                     subtitle=ft.Text(f"Tax Number: {list[i][5]}"),
-                    on_click=lambda e: print(e.control.value),
+                    on_click=lambda e, client_id=list[i][0]: page.go(
+                        f"/client_card/{client_id}"
+                    ),
                 ),
             )
         return client_list
