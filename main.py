@@ -3,6 +3,7 @@ from views.layout.menus import menu_appbar
 from views.layout.home import home
 from views.clients_form.clients_view import clients_view
 from views.clients_form.clients_add import clients_add
+from views.clients_form.clients_view_card import client_card
 
 
 def main(page: ft.Page):
@@ -43,6 +44,12 @@ def main(page: ft.Page):
                     padding=ft.padding.all(0),
                 )
             )
+        elif e.route.startswith("/client_card"):
+            print(e.route)
+            try:
+                client_id = int(e.route.split("/")[-1])
+            except ValueError:
+                print("Invalid client ID provided in the route.")
         page.update()
 
     def view_pop(view):

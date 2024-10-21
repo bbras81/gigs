@@ -8,31 +8,6 @@ def clients_view(page: ft.Page):
     clients.company_name.value = "Bruno Brás"
     clients.company_name.border = ft.InputBorder.NONE
 
-    def card_view(client_id):
-        list_view.visible = False
-        export.visible = True
-        page.update()
-
-    export = ft.Card(
-        content=ft.Container(
-            content=ft.Column(
-                controls=[
-                    clients.company_name,
-                    clients.address,
-                    clients.zip_code,
-                    clients.city,
-                    clients.tax_number,
-                    clients.email,
-                    clients.phone_number,
-                    clients.receipt_required,
-                ],
-            ),
-            padding=ft.padding.all(20),
-            expand=True,
-            visible=False,
-        )
-    )
-
     def load_clients_list():
         list = clients.client_info_all()
         client_list = []
@@ -41,7 +16,7 @@ def clients_view(page: ft.Page):
                 ft.ListTile(
                     title=ft.Text(f"{list[i][1]} (ID: {list[i][0]})"),
                     subtitle=ft.Text(f"Tax Number: {list[i][5]}"),
-                    on_click=lambda _: card_view({list[i][0]}),
+                    on_click=lambda e: print(e.control.value),
                 ),
             )
         return client_list
@@ -53,15 +28,12 @@ def clients_view(page: ft.Page):
         divider_thickness=1,
     )
 
-    container = ft.Container(
+    return ft.Container(
         content=ft.Column(
             controls=[
-                export,
                 list_view,
             ]
         ),
         expand=True,
         margin=ft.margin.all(0),
     )
-
-    return container
