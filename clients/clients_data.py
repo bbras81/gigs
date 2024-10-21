@@ -86,3 +86,7 @@ class Clients:
                 client_data["receipt_required"],
             ),
         )
+
+    def client_info_all(self):
+        client_information = db.db_execute("SELECT * FROM clients", fetch_all=True)
+        return client_information

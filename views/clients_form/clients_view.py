@@ -27,18 +27,29 @@ def clients_view(page: ft.Page):
         )
     )
 
+    # def load_clients_list():
+    #     list = clients.client_info_all()
+    #     client_list = []
+    #     for i in range(len(list)):
+    #         client_list.append(
+    #             ft.ListTile(
+    #                 title=ft.Text(f"{list[i][1]} (ID: {list[i][0]})"),
+    #                 subtitle=ft.Text(f"Tax Number: {list[i][5]}"),
+    #             ),
+    #         )
+    #     return client_list
+
     list_view = ft.ListView(
-        
+        # controls=load_clients_list(),
+        spacing=10,
+        padding=10,
+        divider_thickness=10,
     )
 
     container = ft.Container(
-        content=ft.Column(
-            controls=[
-                list_view,
-            ],
-        ),
+        content=ft.Column(controls=[list_view]),
         expand=True,
-        bgcolor=ft.colors.TEAL_100,
         margin=ft.margin.all(0),
     )
+
     return container
