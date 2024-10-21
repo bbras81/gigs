@@ -23,6 +23,7 @@ def clients_view(page: ft.Page):
                 ],
             ),
             padding=ft.padding.all(20),
+            expand=True,
         )
     )
     return export

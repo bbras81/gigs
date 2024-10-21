@@ -16,7 +16,7 @@ def menu_appbar(page: ft.Page):
                     ft.PopupMenuItem(
                         text="Clients",
                         icon=ft.icons.PEOPLE,
-                        on_click=lambda _: page.go("/view_client"),
+                        on_click=lambda _: page.go("/client_add"),
                     ),
                     ft.PopupMenuItem(
                         text="Settings",

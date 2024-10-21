@@ -3,61 +3,42 @@ import db
 
 
 class Clients:
-    def __init__(
-        self,
-        company_name: str = "",
-        address: str = "",
-        zip_code: str = "",
-        city: str = "",
-        tax_number: int = 0,
-        email: str = "",
-        phone_number: int = 0,
-        receipt_required: bool = False,
-    ):
-        self.company_name = company_name
-        self.address = address
-        self.zip_code = zip_code
-        self.city = city
-        self.tax_number = tax_number
-        self.email = email
-        self.phone_number = phone_number
-        self.receipt_required = receipt_required
-
-        self.company_name_tf = ft.TextField(
+    def __init__(self):
+        self.company_name = ft.TextField(
             label="Company Name",
             autofocus=True,
         )
-
-        self.address_tf = ft.TextField(
+        self.address = ft.TextField(
             label="Address",
         )
 
-        self.zip_code_tf = ft.TextField(
+        self.zip_code = ft.TextField(
             label="Zip Code",
         )
 
-        self.city_tf = ft.TextField(
+        self.city = ft.TextField(
             label="City",
         )
 
-        self.tax_number_tf = ft.TextField(
+        self.tax_number = ft.TextField(
             label="Tax Number",
         )
 
-        self.email_tf = ft.TextField(
+        self.email = ft.TextField(
             label="Email",
         )
 
-        self.phone_number_tf = ft.TextField(
+        self.phone_number = ft.TextField(
             label="Phone Number",
         )
 
-        self.receipt_required_tf = ft.Checkbox(
+        self.receipt_required = ft.Checkbox(
             label="Receipt required?",
         )
         self.house_name = ft.TextField(
             label="House Name",
         )
+
         # Cria a tabela de clientes se não existir
         db.db_execute(
             """CREATE TABLE IF NOT EXISTS clients (
@@ -84,4 +65,24 @@ class Clients:
             )
             """,
             [],
+        )
+
+    def create_client(client_data: dict) -> None:
+        """Insert a new client into the database."""
+        db.db_execute(
+            """INSERT INTO clients (
+                company_name, address, zip_code, city, tax_number, email, phone_number, receipt_required
+            ) VALUES (
+                ?, ?, ?, ?, ?, ?, ?, ?
+            )""",
+            params=(
+                client_data["company_name"],
+                client_data["company_address"],
+                client_data["company_zip"],
+                client_data["city"],
+                client_data["tax_number"],
+                client_data["email"],
+                client_data["phone_number"],
+                client_data["receipt_required"],
+            ),
         )
