@@ -45,9 +45,10 @@ def main(page: ft.Page):
                 )
             )
         elif e.route.startswith("/client_card"):
-            print(e.route)
+
             try:
                 client_id = int(e.route.split("/")[-1])
+                print(client_id)
             except ValueError:
                 print("Invalid client ID provided in the route.")
         page.update()
