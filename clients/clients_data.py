@@ -67,7 +67,7 @@ class Clients:
             [],
         )
 
-    def create_client(client_data: dict) -> None:
+    def create_client(self, client_data: dict) -> None:
         """Insert a new client into the database."""
         db.db_execute(
             """INSERT INTO clients (

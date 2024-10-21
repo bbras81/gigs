@@ -20,7 +20,8 @@ def home(page: ft.Page):
                     alignment=ft.MainAxisAlignment.END,
                 ),
             ]
-        )
+        ),
+        padding=ft.padding.all(10),
     )
 
     return home_page

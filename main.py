@@ -22,6 +22,7 @@ def main(page: ft.Page):
                 route="/",
                 appbar=app_bar,
                 controls=[home(page)],
+                padding=ft.padding.all(0),
             )
         )
         if e.route == "/view_client":
@@ -30,6 +31,7 @@ def main(page: ft.Page):
                     route="/view_client",
                     appbar=app_bar,
                     controls=[clients_view(page)],  # Chama a visualização dos clientes
+                    padding=ft.padding.all(0),
                 )
             )
         elif e.route == "/client_add":
@@ -38,6 +40,7 @@ def main(page: ft.Page):
                     route="/client_add",
                     appbar=app_bar,
                     controls=[clients_add(page)],
+                    padding=ft.padding.all(0),
                 )
             )
         page.update()
