@@ -2,62 +2,121 @@ import flet as ft
 from clients.clients_data import Clients
 
 
-def client_card(page: ft.Page, client_id: int):
+def client_card(page: ft.Page, client_id: int) -> ft.Card:
     """
     Creates a card with client information.
 
     Args:
-    page (ft.Page): The page where the card will be shown.
-    client_id (int): The id of the client to be shown in the card.
+        page (ft.Page): The page where the card will be shown.
+        client_id (int): The id of the client to be shown in the card.
 
     Returns:
-    ft.Card: A card with all the information of the client.
+        ft.Card: A card with all the information of the client.
     """
-    clients = Clients()
-    clients.company_name.read_only = True
-    clients.company_name.border = ft.InputBorder.NONE
-    clients.company_name.value = clients.client_info_by_id(client_id)[1]
-    clients.address.read_only = True
-    clients.address.border = ft.InputBorder.NONE
-    clients.address.value = clients.client_info_by_id(client_id)[2]
-    clients.zip_code.read_only = True
-    clients.zip_code.border = ft.InputBorder.NONE
-    clients.zip_code.value = clients.client_info_by_id(client_id)[3]
-    clients.city.read_only = True
-    clients.city.border = ft.InputBorder.NONE
-    clients.city.value = clients.client_info_by_id(client_id)[4]
-    clients.tax_number.read_only = True
-    clients.tax_number.border = ft.InputBorder.NONE
-    clients.tax_number.value = clients.client_info_by_id(client_id)[5]
-    clients.email.read_only = True
-    clients.email.border = ft.InputBorder.NONE
-    clients.email.value = clients.client_info_by_id(client_id)[6]
-    clients.phone_number.read_only = True
-    clients.phone_number.border = ft.InputBorder.NONE
-    clients.phone_number.value = clients.client_info_by_id(client_id)[7]
-    clients.receipt_required.disabled = True
-    if clients.client_info_by_id(client_id)[8] == 1:
-        clients.receipt_required.value = True
-    else:
-        clients.receipt_required.value = False
 
-    export = ft.Card(
+    clients = Clients()
+    client = clients.client_info_by_id(client_id)
+    add_store = ft.TextButton("Add Store", on_click=lambda e: store_fields(e))
+    store_tf = ft.Column(
+        controls=[
+            clients.store_name,
+            ft.TextButton("Ok", on_click=lambda _: store_save(page)),
+        ],
+        horizontal_alignment=ft.CrossAxisAlignment.END,
+        spacing=10,
+        visible=False,
+    )
+    store_list = ft.Column(
+        controls=[
+            ft.TextField(
+                label="Stores",
+                value=" ",
+                read_only=True,
+                border=ft.InputBorder.NONE,
+                height=15,
+            ),
+            ft.ListView(
+                controls=[
+                    ft.ListTile(
+                        title=ft.Text(f"casa de fado"),
+                    )
+                ]
+            ),
+        ]
+    )
+    address = ft.TextField(
+        label="Address", value=client[2], read_only=True, border=ft.InputBorder.NONE
+    )
+    city = ft.TextField(
+        label="City", value=client[4], read_only=True, border=ft.InputBorder.NONE
+    )
+    company_name = ft.TextField(
+        label="Company Name",
+        value=client[1],
+        read_only=True,
+        border=ft.InputBorder.NONE,
+    )
+    email = ft.TextField(
+        label="Email", value=client[6], read_only=True, border=ft.InputBorder.NONE
+    )
+    phone_number = ft.TextField(
+        label="Phone Number",
+        value=client[7],
+        read_only=True,
+        border=ft.InputBorder.NONE,
+    )
+    receipt_required = ft.Checkbox(
+        label="Receipt required?", value=bool(client[8]), disabled=True
+    )
+    tax_number = ft.TextField(
+        label="Tax Number",
+        value=client[5],
+        read_only=True,
+        border=ft.InputBorder.NONE,
+    )
+    zip_code = ft.TextField(
+        label="Zip Code", value=client[3], read_only=True, border=ft.InputBorder.NONE
+    )
+
+    def store_fields(e):
+        store_tf.visible = not store_tf.visible
+        add_store.text = "Close" if store_tf.visible else "Add Store"
+        store_tf.update()
+        add_store.update()
+
+    def store_save(page): ...
+
+    client_card_view = ft.Card(
         content=ft.Container(
             content=ft.Column(
                 controls=[
-                    clients.company_name,
-                    clients.address,
-                    clients.zip_code,
-                    clients.city,
-                    clients.tax_number,
-                    clients.email,
-                    clients.phone_number,
-                    clients.receipt_required,
-                ],
+                    company_name,
+                    address,
+                    zip_code,
+                    city,
+                    tax_number,
+                    email,
+                    phone_number,
+                    receipt_required,
+                    store_list,
+                    store_tf,
+                ]
             ),
             padding=ft.padding.all(20),
             expand=True,
         )
     )
 
-    return export
+    return ft.Container(
+        content=ft.Column(
+            controls=[
+                client_card_view,
+                ft.Row(
+                    controls=[
+                        add_store,
+                    ],
+                    alignment=ft.MainAxisAlignment.END,
+                ),
+            ]
+        )
+    )

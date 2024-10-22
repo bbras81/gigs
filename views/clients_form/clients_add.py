@@ -7,17 +7,6 @@ clients = Clients()
 
 def clients_add(page: ft.Page):
     page.title = "Add Client"
-
-    add_store = ft.TextButton("Add Store", on_click=lambda e: store_fields(e))
-    store_tf = ft.Column(
-        controls=[
-            clients.store_name,
-            ft.TextButton("Ok", on_click=lambda _: store_save(page)),
-        ],
-        horizontal_alignment=ft.CrossAxisAlignment.END,
-        spacing=10,
-        visible=False,
-    )
     export = ft.Container(
         content=ft.Column(
             controls=[
@@ -30,10 +19,9 @@ def clients_add(page: ft.Page):
                 clients.email,
                 clients.phone_number,
                 ft.Row(
-                    [clients.receipt_required, add_store],
+                    [clients.receipt_required], 
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 ),
-                store_tf,
                 ft.ElevatedButton(
                     "Add",
                     on_click=lambda _: save_client(page),
@@ -47,12 +35,6 @@ def clients_add(page: ft.Page):
         padding=ft.padding.all(15),
         expand=True,
     )
-
-    def store_fields(e):
-        store_tf.visible = not store_tf.visible
-        add_store.text = "Close" if store_tf.visible else "Add Store"
-        store_tf.update()
-        add_store.update()
 
     return export
 
@@ -82,11 +64,3 @@ def save_client(page):
         clients.add_store_db(client_data)
 
         page.go("/clients_view")
-
-
-def store_save(page):
-    if clients.company_name.value == "":
-        modal_alert(page, error_text="Please insert a valid Store Name")
-        return
-    else:
-        clients.add_store_db()
