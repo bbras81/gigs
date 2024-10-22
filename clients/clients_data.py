@@ -90,6 +90,20 @@ class Clients:
             ),
         )
 
+    def add_store_db(self, client_data: dict) -> None:
+        """Insert a new store into the database."""
+        db.db_execute(
+            """INSERT INTO commercial_establishments (
+                name, id_client
+            ) VALUES (
+                ?, ?
+            )""",
+            params=(
+                client_data["store_name"],
+                client_data["id_client"],
+            ),
+        )
+
     def client_info_all(self):
         client_information = db.db_execute("SELECT * FROM clients", fetch_all=True)
         return client_information
