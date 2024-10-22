@@ -102,11 +102,19 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
                 ft.Row(
                     controls=[
                         ft.IconButton(
+                            icon=ft.icons.DELETE,
+                            on_click=lambda _: page.go(f"/client_delete/{client_id}"),
+                        ),
+                        ft.IconButton(
+                            icon=ft.icons.ADD,
+                            on_click=lambda _: page.go(f"/client_add"),
+                        ),
+                        ft.IconButton(
                             icon=ft.icons.EDIT,
                             on_click=lambda _: page.go(f"/client_update/{client_id}"),
                         ),
                     ],
-                    alignment=ft.MainAxisAlignment.END,
+                    alignment=ft.MainAxisAlignment.SPACE_AROUND,
                 ),
             ]
         )
