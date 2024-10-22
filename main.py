@@ -4,6 +4,7 @@ from views.layout.home import home
 from views.clients_form.clients_view import clients_view
 from views.clients_form.clients_add import clients_add
 from views.clients_form.clients_view_card import client_card
+from views.clients_form.clients_update import clients_update
 
 
 def main(page: ft.Page):
@@ -52,6 +53,19 @@ def main(page: ft.Page):
                         route=f"/client_card/{client_id}",
                         appbar=app_bar,
                         controls=[client_card(page, client_id)],
+                        padding=ft.padding.all(5),
+                    )
+                )
+            except ValueError:
+                print("Invalid client ID provided in the route.")
+        elif e.route.startswith("/client_update"):
+            try:
+                client_id = int(e.route.split("/")[-1])
+                page.views.append(
+                    ft.View(
+                        route=f"/client_update/{client_id}",
+                        appbar=app_bar,
+                        controls=[clients_update(page, client_id)],
                         padding=ft.padding.all(5),
                     )
                 )

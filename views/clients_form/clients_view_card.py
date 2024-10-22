@@ -113,6 +113,10 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
                 client_card_view,
                 ft.Row(
                     controls=[
+                        ft.IconButton(
+                            icon=ft.icons.EDIT,
+                            on_click=lambda _: page.go(f"/client_update/{client_id}"),
+                        ),
                         add_store,
                     ],
                     alignment=ft.MainAxisAlignment.END,
