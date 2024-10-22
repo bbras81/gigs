@@ -88,10 +88,9 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
                     phone_number,
                     receipt_required,
                     store_list_column,
-                ]
+                ],
             ),
             padding=ft.padding.all(20),
-            expand=True,
         )
     )
 
@@ -116,6 +115,8 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
                     ],
                     alignment=ft.MainAxisAlignment.SPACE_AROUND,
                 ),
-            ]
-        )
+            ],
+            scroll=ft.ScrollMode.HIDDEN,
+        ),
+        expand=True,
     )
