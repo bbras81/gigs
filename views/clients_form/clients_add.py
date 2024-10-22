@@ -57,6 +57,5 @@ def save_client(page):
             "store_name": clients.company_name.value.strip(),
         }
         clients.create_client(client_data)
-        clients.add_store_db(client_data)
 
-        page.go("/clients_view")
+        page.go("/view_client")

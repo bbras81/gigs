@@ -16,17 +16,9 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
 
     clients = Clients()
     client = clients.client_info_by_id(client_id)
-    add_store = ft.TextButton("Add Store", on_click=lambda e: store_fields(e))
-    store_tf = ft.Column(
-        controls=[
-            clients.store_name,
-            ft.TextButton("Ok", on_click=lambda _: store_save(page)),
-        ],
-        horizontal_alignment=ft.CrossAxisAlignment.END,
-        spacing=10,
-        visible=False,
-    )
-    store_list = ft.Column(
+    client_stores = clients.get_store_by_id(client_id)
+    store_list = ft.ListView(controls=[])
+    store_list_column = ft.Column(
         controls=[
             ft.TextField(
                 label="Stores",
@@ -35,15 +27,20 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
                 border=ft.InputBorder.NONE,
                 height=15,
             ),
-            ft.ListView(
-                controls=[
-                    ft.ListTile(
-                        title=ft.Text(f"casa de fado"),
-                    )
-                ]
-            ),
-        ]
+            store_list,
+        ],
+        visible=False,
     )
+
+    if len(client_stores) > 0:
+        for i in range(len(client_stores)):
+            store_list.controls.append(
+                ft.ListTile(
+                    title=ft.Text(f"{client_stores[i][1]}"),
+                )
+            )
+        store_list_column.visible = True
+
     address = ft.TextField(
         label="Address", value=client[2], read_only=True, border=ft.InputBorder.NONE
     )
@@ -78,14 +75,6 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
         label="Zip Code", value=client[3], read_only=True, border=ft.InputBorder.NONE
     )
 
-    def store_fields(e):
-        store_tf.visible = not store_tf.visible
-        add_store.text = "Close" if store_tf.visible else "Add Store"
-        store_tf.update()
-        add_store.update()
-
-    def store_save(page): ...
-
     client_card_view = ft.Card(
         content=ft.Container(
             content=ft.Column(
@@ -98,8 +87,7 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
                     email,
                     phone_number,
                     receipt_required,
-                    store_list,
-                    store_tf,
+                    store_list_column,
                 ]
             ),
             padding=ft.padding.all(20),
@@ -117,7 +105,6 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
                             icon=ft.icons.EDIT,
                             on_click=lambda _: page.go(f"/client_update/{client_id}"),
                         ),
-                        add_store,
                     ],
                     alignment=ft.MainAxisAlignment.END,
                 ),

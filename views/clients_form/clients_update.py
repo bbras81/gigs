@@ -21,6 +21,17 @@ def clients_update(page: ft.Page, client_id: int):
     else:
         clients.receipt_required.value = False
 
+    add_store = ft.TextButton("Add Store", on_click=lambda e: store_fields(e))
+    store_tf = ft.Column(
+        controls=[
+            clients.store_name,
+            ft.TextButton("Ok", on_click=lambda _: store_save(page)),
+        ],
+        horizontal_alignment=ft.CrossAxisAlignment.END,
+        spacing=10,
+        visible=False,
+    )
+
     export = ft.Container(
         content=ft.Column(
             controls=[
@@ -32,8 +43,9 @@ def clients_update(page: ft.Page, client_id: int):
                 clients.tax_number,
                 clients.email,
                 clients.phone_number,
+                store_tf,
                 ft.Row(
-                    [clients.receipt_required],
+                    [clients.receipt_required, add_store],
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 ),
                 ft.ElevatedButton(
@@ -49,6 +61,24 @@ def clients_update(page: ft.Page, client_id: int):
         padding=ft.padding.all(15),
         expand=True,
     )
+
+    def store_fields(e):
+        store_tf.visible = not store_tf.visible
+        add_store.text = "Close" if store_tf.visible else "Add Store"
+        store_tf.update()
+        add_store.update()
+
+    def store_save(page):  # Cria uma nova loja
+        if not clients.store_name.value:
+            modal_alert(page, error_text="Please insert a valid Store Name")
+            return
+        else:
+            store_data = {
+                "store_name": clients.store_name.value.strip(),
+                "id_client": clients.id_client,
+            }
+            clients.add_store_db(store_data)
+            page.go("/view_client")
 
     return export
 
