@@ -90,3 +90,9 @@ class Clients:
     def client_info_all(self):
         client_information = db.db_execute("SELECT * FROM clients", fetch_all=True)
         return client_information
+
+    def client_info_by_id(self, client_id: int):
+        client_information = db.db_execute(
+            "SELECT * FROM clients WHERE id_client = ?", (client_id,), fetch_one=True
+        )
+        return client_information

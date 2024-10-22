@@ -45,10 +45,16 @@ def main(page: ft.Page):
                 )
             )
         elif e.route.startswith("/client_card"):
-
             try:
                 client_id = int(e.route.split("/")[-1])
-                print(client_id)
+                page.views.append(
+                    ft.View(
+                        route=f"/client_card/{client_id}",
+                        appbar=app_bar,
+                        controls=[client_card(page, client_id)],
+                        padding=ft.padding.all(0),
+                    )
+                )
             except ValueError:
                 print("Invalid client ID provided in the route.")
         page.update()
