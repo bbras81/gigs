@@ -28,3 +28,5 @@ Gigs App is a mobile application designed to help professional musicians manage 
 ## Installation
 
 1. Clone the repository:
+
+https://github.com/bbras81/gigs
