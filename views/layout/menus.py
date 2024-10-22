@@ -28,3 +28,24 @@ def menu_appbar(page: ft.Page):
     )
 
     return appbar
+
+
+def menu_bottom_bar(page: ft.Page):
+
+    bottom_bar = ft.BottomAppBar(
+        content=ft.Row(
+            controls=[
+                ft.IconButton(
+                    icon=ft.icons.ADD_CIRCLE_OUTLINE,
+                    on_click=lambda _: page.go("/client_add"),
+                    tooltip="Add Gig",
+                    icon_size=40,
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            vertical_alignment=ft.CrossAxisAlignment.END,
+        ),
+        shape=ft.NotchShape.CIRCULAR,
+        height=100,
+    )
+    return bottom_bar

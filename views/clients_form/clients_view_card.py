@@ -3,6 +3,16 @@ from clients.clients_data import Clients
 
 
 def client_card(page: ft.Page, client_id: int):
+    """
+    Creates a card with client information.
+
+    Args:
+    page (ft.Page): The page where the card will be shown.
+    client_id (int): The id of the client to be shown in the card.
+
+    Returns:
+    ft.Card: A card with all the information of the client.
+    """
     clients = Clients()
     clients.company_name.read_only = True
     clients.company_name.border = ft.InputBorder.NONE
@@ -25,7 +35,7 @@ def client_card(page: ft.Page, client_id: int):
     clients.phone_number.read_only = True
     clients.phone_number.border = ft.InputBorder.NONE
     clients.phone_number.value = clients.client_info_by_id(client_id)[7]
-    clients.receipt_required.read_only = True
+    clients.receipt_required.disabled = True
     if clients.client_info_by_id(client_id)[8] == 1:
         clients.receipt_required.value = True
     else:

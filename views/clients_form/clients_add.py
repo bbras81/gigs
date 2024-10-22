@@ -4,9 +4,18 @@ from errors_handling import modal_alert
 
 clients = Clients()
 
+add_store = ft.TextButton("Add Store", on_click=lambda e: store_fields(e))
+store_tf = ft.Column(
+    controls=[clients.store_name, ft.TextButton("Ok")],
+    horizontal_alignment=ft.CrossAxisAlignment.END,
+    spacing=10,
+    visible=False,
+)
+
 
 def clients_add(page: ft.Page):
     page.title = "Add Client"
+
     export = ft.Container(
         content=ft.Column(
             controls=[
@@ -18,7 +27,11 @@ def clients_add(page: ft.Page):
                 clients.tax_number,
                 clients.email,
                 clients.phone_number,
-                clients.receipt_required,
+                ft.Row(
+                    [clients.receipt_required, add_store],
+                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                ),
+                store_tf,
                 ft.ElevatedButton(
                     "Add",
                     on_click=lambda _: save_client(page),
@@ -26,9 +39,11 @@ def clients_add(page: ft.Page):
                     height=40,
                 ),
             ],
-            scroll=ft.ScrollMode.AUTO,
+            scroll=ft.ScrollMode.HIDDEN,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        )
+        ),
+        padding=ft.padding.all(15),
+        expand=True,
     )
 
     return export
@@ -51,4 +66,11 @@ def save_client(page):
             "receipt_required": 1 if clients.receipt_required.value else 0,
         }
         clients.create_client(client_data)
-        page.go("/")
+        page.go("/clients_view")
+
+
+def store_fields(e):
+    store_tf.visible = not store_tf.visible
+    add_store.text = "Close" if store_tf.visible else "Add Store"
+    store_tf.update()
+    add_store.update()

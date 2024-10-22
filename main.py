@@ -52,7 +52,7 @@ def main(page: ft.Page):
                         route=f"/client_card/{client_id}",
                         appbar=app_bar,
                         controls=[client_card(page, client_id)],
-                        padding=ft.padding.all(0),
+                        padding=ft.padding.all(5),
                     )
                 )
             except ValueError:

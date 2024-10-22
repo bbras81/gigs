@@ -1,5 +1,6 @@
 import flet as ft
 from clients.clients_data import Clients
+from views.layout.menus import menu_bottom_bar
 
 
 def clients_view(page: ft.Page):
@@ -28,12 +29,14 @@ def clients_view(page: ft.Page):
         spacing=10,
         padding=10,
         divider_thickness=1,
+        expand=True,
     )
 
     return ft.Container(
         content=ft.Column(
             controls=[
                 list_view,
+                menu_bottom_bar(page),
             ]
         ),
         expand=True,

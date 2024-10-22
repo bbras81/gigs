@@ -38,6 +38,9 @@ class Clients:
         self.house_name = ft.TextField(
             label="House Name",
         )
+        self.store_name = ft.TextField(
+            label="Store Name",
+        )
 
         # Cria a tabela de clientes se não existir
         db.db_execute(
