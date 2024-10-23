@@ -27,6 +27,7 @@ def main(page: ft.Page):
                 padding=ft.padding.all(0),
             )
         )
+
         if e.route == "/view_client":
             page.views.append(
                 ft.View(
