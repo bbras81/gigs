@@ -7,6 +7,7 @@ from views.clients_form.clients_view_card import client_card
 from views.clients_form.clients_update import clients_update
 
 
+
 def main(page: ft.Page):
     page.title = "My App"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
