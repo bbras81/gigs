@@ -128,7 +128,7 @@ def my_cal(page: ft.Page):
                 0,
                 ft.Container(
                     height=48,
-                    col=1,  
+                    col=1,
                     border_radius=ft.border_radius.all(25),
                     alignment=ft.alignment.center,
                 ),
