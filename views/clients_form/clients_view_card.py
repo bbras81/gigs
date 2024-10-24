@@ -118,5 +118,6 @@ def client_card(page: ft.Page, client_id: int) -> ft.Card:
             ],
             scroll=ft.ScrollMode.HIDDEN,
         ),
+        margin=ft.margin.only(bottom=20),
         expand=True,
     )
