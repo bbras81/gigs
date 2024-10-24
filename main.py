@@ -7,12 +7,27 @@ from views.clients_form.clients_view_card import client_card
 from views.clients_form.clients_update import clients_update
 
 
-
 def main(page: ft.Page):
     page.title = "My App"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.window.width = 400
     page.window.height = 932
+
+    def modal_alert(page, error_text=None):
+        alert = ft.AlertDialog(
+            title=ft.Text("Erro"),
+            content=ft.Text(error_text),
+            actions=[
+                ft.TextButton(
+                    text="Ok", on_click=lambda _: page.close(alert)
+                )  # Fecha o diálogo
+            ],
+        )
+
+        # Adiciona o alerta à página usando overlay
+        page.overlay.append(alert)
+        alert.open = True
+        page.update()
 
     app_bar = menu_appbar(page)
 

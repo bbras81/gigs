@@ -92,7 +92,7 @@ def my_cal(page: ft.Page):
                         else None
                     ),  # Muda o fundo se o dia for selecionado e for o mês atual
                     border=(
-                        ft.border.all(1, ft.colors.BLACK)
+                        ft.border.all(1, ft.colors.BLUE)
                         if i == current_day and month == datetime.today().month
                         else None
                     ),
