@@ -39,7 +39,9 @@ def my_cal(page: ft.Page):
             calendario_days.controls[day + first_day_weekday - 1].bgcolor = (
                 ft.colors.BLUE_100
             )  # Atualiza o dia selecionado
+            selected_day = str(f"{day}/{month}/{year}")
             page.update()  # Atualiza a página para refletir a mudança visual
+            return selected_day
 
         month_and_year = ft.Row(
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,

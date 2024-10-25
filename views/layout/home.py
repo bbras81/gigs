@@ -1,4 +1,5 @@
 import flet as ft
+
 from .my_calendar import my_cal
 
 
@@ -13,7 +14,7 @@ def home(page: ft.Page):
                     controls=[
                         ft.IconButton(
                             icon=ft.icons.ADD,
-                            on_click=lambda e: page.go("/gig_add"),
+                            on_click=lambda e: page.go(f"/gig_add"),
                             tooltip="Add Gig",
                         ),
                     ],
