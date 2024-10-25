@@ -91,7 +91,6 @@ def main(page: ft.Page):
                 print("Invalid client ID provided in the route.")
 
         elif e.route == "/gig_add":
-            print(e.route)
             page.views.append(
                 ft.View(
                     route="/gig_add",
