@@ -5,6 +5,7 @@ from views.clients_form.clients_view import clients_view
 from views.clients_form.clients_add import clients_add
 from views.clients_form.clients_view_card import client_card
 from views.clients_form.clients_update import clients_update
+from views.gigs_form.gigs_add import gigs_add
 
 
 def main(page: ft.Page):
@@ -88,6 +89,16 @@ def main(page: ft.Page):
                 )
             except ValueError:
                 print("Invalid client ID provided in the route.")
+
+        elif e.route == "/gig_add":
+            page.views.append(
+                ft.View(
+                    route="/gig_add",
+                    appbar=app_bar,
+                    controls=[gigs_add(page)],
+                    padding=ft.padding.all(5),
+                )
+            )
         page.update()
 
     def view_pop(view):

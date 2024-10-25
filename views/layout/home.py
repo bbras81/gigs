@@ -13,7 +13,7 @@ def home(page: ft.Page):
                     controls=[
                         ft.IconButton(
                             icon=ft.icons.ADD,
-                            on_click=lambda e: page.go("/gigs_add"),
+                            on_click=lambda e: page.go("/gig_add"),
                             tooltip="Add Gig",
                         ),
                     ],
