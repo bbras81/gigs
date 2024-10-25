@@ -70,11 +70,16 @@ class Clients:
         return db.db_execute(
             "SELECT * FROM clients WHERE id_client = ?", (client_id,), fetch_one=True
         )
-    
+
     def get_store_by_id(self, client_id: int):
         return db.db_execute(
-            "SELECT * FROM commercial_establishments WHERE id_client = ?", (client_id,), fetch_all=True
+            "SELECT * FROM commercial_establishments WHERE id_client = ?",
+            (client_id,),
+            fetch_all=True,
         )
+
+    def get_store_all(self):
+        return db.db_execute("SELECT * FROM commercial_establishments", fetch_all=True)
 
     def update_client(self, client_data: dict) -> None:
         """Update an existing client in the database."""

@@ -1,10 +1,19 @@
 import flet as ft
-# from gigs.gigs_data import Gigs
+
+from gigs.gigs_data import Gigs
 
 
-# gigs_data = Gigs
+gigs_info = Gigs
 
 
-def gigs_add(page: ft.Page):
+def gigs_add_c(page: ft.Page):
+    page.title = "Add Gig"
 
-    pass
+    return ft.Container(
+        content=ft.Column(
+            controls=[
+                ft.Text("Add Gig"),
+                gigs_info.
+            ]
+        )
+    )
