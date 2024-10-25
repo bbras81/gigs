@@ -13,6 +13,7 @@ def home(page: ft.Page):
             controls=[
                 calendar.get_month_year_row(),
                 calendar.get_week_days_row(),
+                calendar.create_calendar(calendar.current_year, calendar.current_month),
                 ft.Divider(),
                 ft.Row(
                     controls=[

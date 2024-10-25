@@ -1,8 +1,11 @@
 import flet as ft
 from datetime import datetime
+import calendar
 
-#TODO Refatoraro calendario por classes para ser mais facial a reutilização
+
+# TODO Refatorar o calendario por classes para ser mais facial a reutilização
 class MyCalendar:
+
     def __init__(self):
         self.current_day = datetime.today().day
         self.current_month = datetime.today().month
@@ -23,6 +26,10 @@ class MyCalendar:
         ]
         self.week_header = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]
         self.selected_day = None
+        self.month_range = calendar.monthrange(self.current_year, self.current_month)
+        self.first_day_weekday = calendar.weekday(
+            self.current_year, self.current_month, 1
+        )
 
     def get_month_year_row(self):
         return ft.Row(
@@ -62,58 +69,54 @@ class MyCalendar:
             expand=True,
         )
 
-    def get_month_days_row(self, month):
-        return ft.ResponsiveRow(
-            columns=7,
+    def days_month(self, day):
+        day_col = ft.Column(
             controls=[
+                ft.Text(
+                    str(day),
+                    size=18,
+                    weight=ft.FontWeight.BOLD,
+                    text_align=ft.TextAlign.CENTER,
+                    col=1,
+                ),
+                ft.Icon(
+                    color=ft.colors.GREEN,
+                    name=(ft.icons.CIRCLE),
+                    size=10,
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        )
+
+        return ft.Container(
+            height=48,
+            col=1,
+            border_radius=ft.border_radius.all(25),
+            alignment=ft.alignment.center,
+            content=day_col,
+            on_click=lambda _: print(day),
+        )
+
+    def create_calendar(self, year, month):
+        self.month_calendar = ft.ResponsiveRow(
+            columns=7,
+            alignment=ft.MainAxisAlignment.START,
+        )
+        for day in range(self.month_range[1]):
+            self.month_calendar.controls.append(self.days_month(day + 1))
+
+        for i in range(self.first_day_weekday):
+            self.month_calendar.controls.insert(
+                0,
                 ft.Container(
                     height=48,
                     col=1,
                     border_radius=ft.border_radius.all(25),
-                    bgcolor=(
-                        ft.colors.BLUE_100
-                        if self.selected_day == i and month == self.current_month
-                        else None
-                    ),  # Muda o fundo se o dia for selecionado e for o mês atual
-                    border=(
-                        ft.border.all(1, ft.colors.BLUE)
-                        if i == self.current_day and month == datetime.today().month
-                        else None
-                    ),
                     alignment=ft.alignment.center,
-                    content=ft.Column(
-                        controls=[
-                            ft.Text(
-                                str(i),
-                                size=18,
-                                weight=ft.FontWeight.BOLD,
-                                text_align=ft.TextAlign.CENTER,
-                                col=1,
-                            ),
-                            ft.Icon(
-                                color=ft.colors.GREEN,
-                                name=(ft.icons.CIRCLE),
-                                size=10,
-                            ),
-                        ],
-                        alignment=ft.MainAxisAlignment.CENTER,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                        spacing=0,
-                    ),
-                    on_click=lambda e, day=i: add_gig(e, day),  # Define o dia clicado
-                )
-                for i in range(1, self.month_range[1] + 1)
-            ],
-        )
-        # Preenchendo os dias vazios no início do mês
+                ),
+            )
 
-    for i in range(first_day_weekday):
-        calendario_days.controls.insert(
-            0,
-            ft.Container(
-                height=48,
-                col=1,
-                border_radius=ft.border_radius.all(25),
-                alignment=ft.alignment.center,
-            ),
-        )
+        return self.month_calendar
+
+    def get_calendar(self): ...
