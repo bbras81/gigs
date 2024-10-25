@@ -1,6 +1,9 @@
 import flet as ft
 
-from .my_calendar import my_cal
+# from .my_calendar import my_cal
+from tools.calendar.my_calendar import MyCalendar
+
+calendar = MyCalendar()
 
 
 def home(page: ft.Page):
@@ -8,7 +11,8 @@ def home(page: ft.Page):
     home_page = ft.Container(
         content=ft.Column(
             controls=[
-                my_cal(page),
+                calendar.get_month_year_row(),
+                calendar.get_week_days_row(),
                 ft.Divider(),
                 ft.Row(
                     controls=[
