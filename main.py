@@ -90,7 +90,10 @@ def main(page: ft.Page):
             except ValueError:
                 print("Invalid client ID provided in the route.")
 
-        elif e.route == "/gig_add":
+        elif e.route.startswith("/gig_add") or e.route == "/gig_add":
+            print(e.route)
+            gig_date = e.route.split("/")[-1]
+            print(gig_date)
             page.views.append(
                 ft.View(
                     route="/gig_add",
