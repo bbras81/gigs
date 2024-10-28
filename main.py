@@ -6,7 +6,6 @@ from views.clients_form.clients_add import clients_add
 from views.clients_form.clients_view_card import client_card
 from views.clients_form.clients_update import clients_update
 from views.gigs_form.gigs_add import gigs_add_c
-from datetime import date
 
 
 def main(page: ft.Page):
