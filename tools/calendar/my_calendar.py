@@ -108,6 +108,7 @@ class MyCalendar:
         )
 
     def select_day(self, day):
+
         self.selected_day = day  # Define o dia selecionado
         self.update_calendar()  # Atualiza o calendário para refletir a seleção
 

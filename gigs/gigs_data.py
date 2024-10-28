@@ -7,7 +7,6 @@ class Gigs:
     def __init__(self):
         self.gig_date = ft.TextField(
             label="Gig date",
-            autofocus=True,
         )
         self.gig_hour = ft.Dropdown(label="Gig start", max_menu_height=300)
         self.gig_cachet = ft.TextField(label="Cachet", suffix_text="€")

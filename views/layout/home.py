@@ -17,7 +17,7 @@ def home(page: ft.Page):
                         ft.IconButton(
                             icon=ft.icons.ADD,
                             on_click=lambda e: page.go(
-                                f"/gig_add/{my_calendar.selected_day}-{my_calendar.current_month}-{my_calendar.current_year}"
+                                f"/gig_add/{my_calendar.current_year}-{my_calendar.current_month}-{my_calendar.selected_day if my_calendar.selected_day else my_calendar.current_day}"
                             ),
                             tooltip="Add Gig",
                         ),

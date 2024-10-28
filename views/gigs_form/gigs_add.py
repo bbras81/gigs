@@ -6,9 +6,9 @@ from gigs.gigs_data import Gigs
 gigs_info = Gigs()
 
 
-def gigs_add_c(page: ft.Page):
+def gigs_add_c(page: ft.Page, gig_date: str):
     page.title = "Add Gig"
-
+    gigs_info.gig_date.value = gig_date
     return ft.Container(
         content=ft.Column(
             controls=[
