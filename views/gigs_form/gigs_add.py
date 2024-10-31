@@ -11,7 +11,6 @@ def gigs_add_c(page: ft.Page, gig_date: str):
     gigs_info.gig_date.width = page.width / 2
     gigs_info.gig_date.value = gig_date
 
-
     hour_button = ft.CupertinoFilledButton(
         content=ft.Text("Hour", color=ft.colors.WHITE),
         on_click=hour_picker_view,
@@ -25,11 +24,18 @@ def gigs_add_c(page: ft.Page, gig_date: str):
                     controls=[
                         gigs_info.gig_date,
                         hour_button,
-                    ]
+                    ],
+                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 ),
                 gigs_info.hour_picker,
                 gigs_info.gig_local,
                 gigs_info.gig_cachet,
+                ft.ElevatedButton(
+                    "Add",
+                    on_click=lambda _: ...,
+                    width=100,
+                    height=40,
+                ),
             ],
             scroll=ft.ScrollMode.HIDDEN,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
