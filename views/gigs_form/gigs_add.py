@@ -31,7 +31,7 @@ def gigs_add_c(page: ft.Page, gig_date: str):
                 gigs_info.gig_local,
                 gigs_info.gig_cachet,
                 ft.ElevatedButton(
-                    "Add",
+                    "Add gig",
                     on_click=lambda _: ...,
                     width=100,
                     height=40,

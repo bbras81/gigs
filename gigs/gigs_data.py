@@ -7,7 +7,7 @@ class Gigs:
     def __init__(self):
 
         self.gig_date = ft.TextField(
-            
+
             label="Gig date",
         )
         self.hour_picker = ft.Container(
@@ -35,3 +35,6 @@ class Gigs:
         for client in client_data:
             options.append(ft.dropdown.Option(client[1]))
         return options
+
+    def add_gig():
+        pass
